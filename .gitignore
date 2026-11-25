@@ -1,0 +1,10 @@
+node_modules/
+dist/
+coverage/
+.env
+*.log
+.DS_Store
+backend/dist/
+frontend/dist/
+frontend/coverage/
+backend/coverage/

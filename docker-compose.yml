@@ -1,0 +1,28 @@
+services:
+  mailpit:
+    image: axllent/mailpit:v1.21
+    ports:
+      - "8025:8025"
+      - "1025:1025"
+
+  api:
+    build: ./backend
+    ports:
+      - "3001:3001"
+    env_file:
+      - .env
+    environment:
+      SMTP_HOST: mailpit
+      CORS_ORIGIN: http://localhost:8080
+    depends_on:
+      - mailpit
+
+  web:
+    build:
+      context: ./frontend
+      args:
+        VITE_API_BASE_URL: /api
+    ports:
+      - "8080:80"
+    depends_on:
+      - api
